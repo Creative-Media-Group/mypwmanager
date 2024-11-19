@@ -9,6 +9,7 @@ class MyPWManager(toga.App):
 
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
+        self.main_window.style = COLUMN
         self.main_window.show()
 
 
