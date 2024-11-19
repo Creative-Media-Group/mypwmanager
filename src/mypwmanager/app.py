@@ -7,8 +7,16 @@ from mylocale.TR import tr
 
 platform = toga.platform.current_platform
 
+
 class MyPWManager(toga.App):
     def startup(self):
+        self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
+        if platform == "android":
+            self.lang = str(
+                self._impl.native.getResources().getConfiguration().getLocales().get(0)
+            ).split("_")[0]
+        else:
+            self.lang = locale.getlocale()[0].split("_")[0]
         main_box = toga.Box()
 
         self.main_window = toga.MainWindow(title=self.formal_name)
