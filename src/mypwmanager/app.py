@@ -1,7 +1,11 @@
 import toga
 from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
+import locale
+from mylocale.TR import tr
 
+
+platform = toga.platform.current_platform
 
 class MyPWManager(toga.App):
     def startup(self):
