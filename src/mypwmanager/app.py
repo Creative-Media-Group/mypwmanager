@@ -3,7 +3,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
-import sqlite3
+from mypwmanager.db_mod.db import DB
 
 platform = toga.platform.current_platform
 
@@ -15,7 +15,7 @@ class MyPWManager(toga.App):  # App
         print(self.db_path)  # create path for db
         self.db = DB(
             tablename="pwmanager",
-            db_url=f"sqlite:///{self.db_path}/pw.db",
+            db_url=f"{self.db_path}/pw.db",
         )
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
@@ -24,7 +24,7 @@ class MyPWManager(toga.App):  # App
             ).split("_")[0]
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
-        self.td = text_direction(lang=self.lang, fp=self.file)
+        # self.td = text_direction(lang=self.lang, fp=self.file)
         rows = []
         print(self.db.get_all_data())
         for i in self.db.get_all_data():

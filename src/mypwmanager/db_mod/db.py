@@ -1,48 +1,36 @@
-from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
+import sqlite3
 
 
 class DB:
-    # Initialisierung der Datenbank
-    def __init__(self, tablename, db_url="sqlite:///example.db"):
-        self.engine = create_engine(db_url)
-        self.Base = declarative_base()
-        self.Session = sessionmaker(bind=self.engine)
-        self.session = self.Session()
-
-        # Definiere die Tabelle
-        class Data(self.Base):
-            __tablename__ = tablename
-            id = Column(Integer, primary_key=True)
-            name = Column(String, nullable=False)
-            website = Column(Integer, nullable=False)
-            username = Column(String, nullable=False)
-            password = Column(String, nullable=False)
-
-        self.Data = Data
-
-        # Tabelle erstellen
-        self.Base.metadata.create_all(self.engine)
-
-    # Daten einfügen
-    def add_data(self, name, website, username, password):
-        new_data = self.Data(
-            name=name, website=website, username=username, password=password
+    def __init__(self, tablename, db_url):
+        self.tablename = tablename
+        self.db_url = db_url
+        self.con = sqlite3.connect(self.db_url)
+        self.cursor = self.con.cursor()
+        self.cursor.execute(
+            f"""
+                CREATE TABLE IF NOT EXISTS {self.tablename} (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    website TEXT NOT NULL,
+                    password TEXT NOT NULL
+                )"""
         )
-        self.session.add(new_data)
-        self.session.commit()
+        self.con.commit()
 
-    # Daten abrufen
+    def add_data(self, name, website, password):
+        self.cursor.execute(
+            f"INSTER INTO {self.tablename} (?, ?, ?)", (name, website, password)
+        )
+        self.con.commit()
+
     def get_all_data(self):
-        return self.session.query(self.Data).all()
+        return self.cursor.execute(
+            f"SELECT id, name, age FROM {self.tablename}"
+        ).fetchall()
 
-    # Benutzer löschen (optional)
-    def delete_data_by_id(self, data_id):
-        data = self.session.query(self.Data).filter_by(id=data_id).first()
-        if data:
-            self.session.delete(data)
-            self.session.commit()
+    def close(self):
+        self.con.close()
 
 
 # Beispielverwendung
