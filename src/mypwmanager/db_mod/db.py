@@ -26,7 +26,7 @@ class DB:
 
     def get_all_data(self):
         return self.cursor.execute(
-            f"SELECT id, name, age FROM {self.tablename}"
+            f"SELECT id, name, website, password FROM {self.tablename}"
         ).fetchall()
 
     def close(self):
@@ -35,7 +35,7 @@ class DB:
 
 # Beispielverwendung
 if __name__ == "__main__":
-    db = DB(tablename="data")
+    db = DB(tablename="data", db_url="example.db")
     while True:
         data = db.get_all_data()
         try:
@@ -50,13 +50,7 @@ if __name__ == "__main__":
                     )
                 if cmd == "l":
                     for column in data:
-                        print(
-                            column.id,
-                            column.name,
-                            column.name,
-                            column.password,
-                            column.website,
-                        )
+                        print(column[0], column[1], column[2], column[3])
                 if cmd == "r":
                     pass
                 if cmd == "ra":
