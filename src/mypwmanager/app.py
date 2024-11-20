@@ -53,9 +53,11 @@ class MyPWManager(toga.App):  # App
         newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center", padding=10))
         username = toga.TextInput(placeholder="Username")
         password = toga.PasswordInput(placeholder="Password")
-        backbtn = toga.Button(text="Back", on_press=self.go_home)
+        website = toga.TextInput(placeholder="Username")
+        backbtn = toga.Button(text="Save & Back", on_press=self.go_home)
         newbox.add(username)
         newbox.add(password)
+        newbox.add(website)
         newbox.add(backbtn)
         self.main_window.content = newbox
 
