@@ -25,14 +25,13 @@ class MyPWManager(toga.App):  # App
             children=[
                 toga.ScrollContainer(
                     content=toga.Box(
-                        children=[
-                            toga.Label("test") for i in range(19)
-                        ],
+                        children=[toga.Label("test") for i in range(19)],
                         style=Pack(alignment="center", direction="column", flex=1),
                     ),
                     vertical=True,
                     horizontal=False,
-                )
+                ),
+                toga.Button("New Window", on_press=self.newwin)
             ]
         )
 
@@ -40,6 +39,11 @@ class MyPWManager(toga.App):  # App
         self.main_window.content = main_box
         self.main_window.style = COLUMN
         self.main_window.show()
+
+    def newwin(self,*args):
+        window = toga.Window()
+        window.content = toga.Box(children=[toga.Label("Window 1")])
+        window.show()
 
 
 def main():
