@@ -49,7 +49,7 @@ class MyPWManager(toga.App):  # App
         self.main_window.style = COLUMN
         self.main_window.show()
 
-    def newwin(self):
+    def newwin(self, widget):
         window = toga.Window()
         window.content = toga.Box(children=[toga.Label("Window 1")])
         window.show()
