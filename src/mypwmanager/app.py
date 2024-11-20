@@ -46,10 +46,13 @@ class MyPWManager(toga.App):  # App
         self.main_window.style = COLUMN
         self.main_window.show()
 
-    def newwin(self, *args):
-        window = toga.Window()
-        window.content = toga.Box(children=[toga.Label("Window 1")])
-        window.show()
+    def newwin(self, **args):
+        if platform == "android":
+            pass
+        else:
+            window = toga.Window()
+            window.content = toga.Box(children=[toga.Label("Window 1")])
+            window.show()
 
 
 def main():
