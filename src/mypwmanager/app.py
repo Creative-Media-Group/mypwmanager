@@ -3,6 +3,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
+import os
 
 
 platform = toga.platform.current_platform
@@ -10,6 +11,8 @@ platform = toga.platform.current_platform
 
 class MyPWManager(toga.App):
     def startup(self):
+        for i in os.listdir(self.app.paths.app):
+            print(i)
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
             self.lang = str(
