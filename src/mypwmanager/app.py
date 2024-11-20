@@ -11,7 +11,8 @@ platform = toga.platform.current_platform
 class MyPWManager(toga.App):  # App
     def startup(self):
         self.db = DB(
-            tablename="pwmanager", db_url=f"sqlite:///{self.paths.app.absolute()}/db/pw.db"
+            tablename="pwmanager",
+            db_url=f"sqlite:///{self.paths.app.absolute()}/db/pw.db",
         )
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
@@ -20,9 +21,102 @@ class MyPWManager(toga.App):  # App
             ).split("_")[0]
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
-        main_box = toga.Box(children=[
-            toga.ScrollContainer(content=toga.Box(children=[toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),]),vertical=True,horizontal=False)
-        ])
+        main_box = toga.Box(
+            children=[
+                toga.ScrollContainer(
+                    content=toga.Box(
+                        children=[
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            toga.Label("test"),
+                            
+                        ],
+                        style=Pack(alignment="center", direction="column", flex=1),
+                    ),
+                    vertical=True,
+                    horizontal=False,
+                )
+            ]
+        )
 
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
