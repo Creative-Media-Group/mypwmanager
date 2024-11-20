@@ -4,8 +4,6 @@ from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
 from mypwmanager.db_mod.db import *
-from sqlalchemy import create_engine
-import os
 
 platform = toga.platform.current_platform
 
