@@ -3,6 +3,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
+from sqlalchemy.orm import relationship, sessionmaker, declarative_base
 import sqlite3
 
 platform = toga.platform.current_platform
@@ -14,7 +15,7 @@ class MyPWManager(toga.App):
         self.db_con = sqlite3.connect(self.db)
         self.cur = self.db_con.cursor()
         self.cur.execute("CREATE TABLE movie(title, uris, otp)")
-        
+
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
             self.lang = str(
