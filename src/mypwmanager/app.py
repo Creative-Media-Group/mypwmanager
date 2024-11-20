@@ -108,7 +108,6 @@ class MyPWManager(toga.App):  # App
                             toga.Label("test"),
                             toga.Label("test"),
                             toga.Label("test"),
-                            
                         ],
                         style=Pack(alignment="center", direction="column", flex=1),
                     ),
