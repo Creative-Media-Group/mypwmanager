@@ -22,7 +22,7 @@ class MyPWManager(toga.App):  # App
             ).split("_")[0]
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
-        self.td = text_direction(lang=self.lang)
+        self.td = text_direction(lang=self.lang,fp=self.file)
         main_box = toga.Box(
             children=[
                 toga.ScrollContainer(
