@@ -3,7 +3,7 @@ import csv
 
 
 def text_direction(
-    lang=locale.getlocale()[0].split("_")[0],
+    lang,
     fp="src/mypwmanager/resources/localisation.csv",
 ):
     rtl_list = [
@@ -37,7 +37,6 @@ def text_direction(
 if __name__ == "__main__":
     print(
         text_direction(
-            lang=locale.getlocale()[0].split("_")[0],
             fp="src/mypwmanager/resources/localisation.csv",
         )
     )

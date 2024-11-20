@@ -27,7 +27,10 @@ class MyPWManager(toga.App):  # App
             children=[
                 toga.ScrollContainer(
                     content=toga.Box(
-                        children=[toga.Label("test") for i in range(19)],
+                        children=[
+                            toga.Label(i.name, i.username, i.password, i.website)
+                            for i in self.db.get_all_data()
+                        ],
                         style=Pack(alignment="center", direction="column", flex=1),
                     ),
                     vertical=True,
