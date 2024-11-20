@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 
 class DB:
     # Initialisierung der Datenbank
-    def __init__(self, db_url="sqlite:///example.db"):
+    def __init__(self, tablename, db_url="sqlite:///example.db"):
         self.engine = create_engine(db_url)
         self.Base = declarative_base()
         self.Session = sessionmaker(bind=self.engine)
@@ -13,7 +13,7 @@ class DB:
 
         # Definiere die Tabelle
         class Data(self.Base):
-            __tablename__ = "users"
+            __tablename__ = tablename
             id = Column(Integer, primary_key=True)
             name = Column(String, nullable=False)
             age = Column(Integer, nullable=False)
@@ -43,9 +43,9 @@ class DB:
 
 # Beispielverwendung
 if __name__ == "__main__":
-    db = DB()
+    db = DB(tablename="data")
     while True:
-        users = db.get_all_users()
+        users = db.get_all_data()
         try:
             cmd = input("a: add, l: list, r: remove, ra: remove all: ")
             if cmd:
