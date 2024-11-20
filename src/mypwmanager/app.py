@@ -11,7 +11,7 @@ platform = toga.platform.current_platform
 class MyPWManager(toga.App):  # App
     def startup(self):
         self.db = DB(
-            tablename="pwmanager", db_url=f"{self.paths.app.absolute()}/db/pw.db"
+            tablename="pwmanager", db_url=f"sqlite:///{self.paths.app.absolute()}/db/pw.db"
         )
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
