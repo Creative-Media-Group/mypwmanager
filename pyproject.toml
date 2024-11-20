@@ -3,7 +3,7 @@
 project_name = "MyPWManager"
 bundle = "de.cmg"
 version = "0.0.1"
-url = "https://cmg.de/mypwmanager"
+url = "https://github.com/Creative-Media-Group/mypwmanager"
 license.file = "LICENSE"
 author = "Jane Developer"
 author_email = "jane@cmg.de"

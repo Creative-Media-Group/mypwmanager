@@ -20,7 +20,9 @@ class MyPWManager(toga.App):  # App
             ).split("_")[0]
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
-        main_box = toga.Box()
+        main_box = toga.Box(children=[
+            toga.ScrollContainer(content=toga.Box(children=[toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),toga.Label("test"),]),vertical=True,horizontal=False)
+        ])
 
         self.main_window = toga.MainWindow(title=self.formal_name)
         self.main_window.content = main_box
