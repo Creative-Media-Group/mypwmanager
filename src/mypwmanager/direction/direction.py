@@ -23,6 +23,8 @@ def text_direction(lang=locale.getlocale()[0].split("_")[0]):
     ]
     if lang in rtl_list:
         return "rtl"
+    else:
+        return "ltr"
 
 
 if __name__ == "__main__":
