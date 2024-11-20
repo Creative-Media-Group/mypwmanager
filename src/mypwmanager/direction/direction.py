@@ -1,5 +1,5 @@
 import locale
-
+from mylocale.TR import tr
 
 def text_direction(lang=locale.getlocale()[0].split("_")[0]):
     rtl_list = [
