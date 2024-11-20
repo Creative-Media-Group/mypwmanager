@@ -32,8 +32,8 @@ class MyPWManager(toga.App):  # App
                 data = (
                     {
                         "icon": toga.Icon(""),
-                        "name": i.name.name,  # self.db.get_all_data()[0].name,
-                        "username": i.username.name,  # self.db.get_all_data()[0].username,
+                        "title": i.name[0],  # self.db.get_all_data()[0].name,
+                        "subtitle": i.username[0],  # self.db.get_all_data()[0].username,
                     },
                 )
             except:
