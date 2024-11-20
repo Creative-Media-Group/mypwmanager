@@ -50,10 +50,11 @@ class MyPWManager(toga.App):  # App
         self.main_window.show()
 
     def newwin(self, widget):
-        newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center",padding=10))
+        newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center", padding=10))
         backbtn = toga.Button(text="Back", on_press=self.go_home)
         newbox.add(backbtn)
         self.main_window.content = newbox
+
     def go_home(self, widget):
         self.main_window.content = self.main_box
 
