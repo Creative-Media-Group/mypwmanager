@@ -11,6 +11,7 @@ class DB:
             f"""
                 CREATE TABLE IF NOT EXISTS {self.tablename} (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT NOT NULL,
                     name TEXT NOT NULL,
                     website TEXT NOT NULL,
                     password TEXT NOT NULL
@@ -18,16 +19,23 @@ class DB:
         )
         self.con.commit()
 
-    def add_data(self, name, website, password):
+    def add_data(self, name, username, website, password):
         self.cursor.execute(
-            f"INSTER INTO {self.tablename} (?, ?, ?)", (name, website, password)
+            f"INSERT INTO {self.tablename} (name, username, website, password) VALUES (?, ?, ?, ?)",
+            (name, username, website, password),
         )
         self.con.commit()
 
     def get_all_data(self):
-        return self.cursor.execute(
-            f"SELECT id, name, website, password FROM {self.tablename}"
-        ).fetchall()
+        self.cursor.execute(
+            f"SELECT id, name, username, website, password FROM {self.tablename}"
+        )
+        columns = [col[0] for col in self.cursor.description]  # Spaltennamen abrufen
+        return [dict(zip(columns, row)) for row in self.cursor.fetchall()]
+
+    def delete_user_by_id(self, user_id):
+        self.cursor.execute(f"DELETE FROM {self.tablename} WHERE id = ?", (user_id,))
+        self.con.commit()
 
     def close(self):
         self.con.close()
@@ -38,26 +46,24 @@ if __name__ == "__main__":
     db = DB(tablename="data", db_url="example.db")
     while True:
         data = db.get_all_data()
-        try:
-            cmd = input("a: add, l: list, r: remove, ra: remove all, e: exit: ")
-            if cmd:
-                if cmd == "a":
-                    db.add_data(
-                        name=input("Name: "),
-                        username=input("Username: "),
-                        password=input("Password: "),
-                        website=input("Website: "),
-                    )
-                if cmd == "l":
-                    for column in data:
-                        print(column[0], column[1], column[2], column[3])
-                if cmd == "r":
-                    pass
-                if cmd == "ra":
-                    rang = len(data)
-                    for id in range(rang):
-                        db.delete_user_by_id(id)
-                if cmd == "e":
-                    exit()
-        except:
-            exit()
+        cmd = input("a: add, l: list, r: remove, ra: remove all, e: exit: ")
+        if cmd:
+            if cmd == "a":
+                db.add_data(
+                    name=input("Name: "),
+                    username=input("Username: "),
+                    password=input("Password: "),
+                    website=input("Website: "),
+                )
+            if cmd == "l":
+                print(data)
+            if cmd == "r":
+                user_id = int(input("ID des Benutzers, der gelöscht werden soll: "))
+                db.delete_user_by_id(user_id)
+            if cmd == "ra":
+                ids = [row[0] for row in data]  # Alle IDs extrahieren
+                for user_id in ids:
+                    db.delete_user_by_id(user_id)
+            if cmd == "e":
+                db.close()
+                exit()

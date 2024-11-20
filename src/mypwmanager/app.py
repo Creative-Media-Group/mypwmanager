@@ -26,19 +26,14 @@ class MyPWManager(toga.App):  # App
             self.lang = locale.getlocale()[0].split("_")[0]
         # self.td = text_direction(lang=self.lang, fp=self.file)
         rows = []
-        print(self.db.get_all_data())
-        for i in self.db.get_all_data():
-            try:
-                data = (
-                    {
-                        "icon": toga.Icon(""),
-                        "title": i.name[1](),
-                        "subtitle": i.username[2](),
-                    },
-                )
-            except:
-                data = {}
-            rows.append(data)
+        for row in self.db.get_all_data():
+            rows.append(
+                {
+                    "icon": toga.Icon(""),
+                    "title": row["name"],
+                    "subtitle": row["username"],
+                }
+            )
         self.mylist = toga.DetailedList(
             # accessors=("name", "username"),
             data=rows,

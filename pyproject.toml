@@ -16,7 +16,7 @@ long_description = """More details about the app should go here.
 sources = ["src/mypwmanager"]
 test_sources = ["tests"]
 
-requires = ["mylocale", "sqlalchemy"]
+requires = ["mylocale"]
 test_requires = ["pytest"]
 
 [tool.briefcase.app.mypwmanager.macOS]
