@@ -26,16 +26,20 @@ class MyPWManager(toga.App):  # App
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
         self.td = text_direction(lang=self.lang, fp=self.file)
+        self.mylist = toga.DetailedList(
+            accessors=("name", "username"),
+            data=[
+                {
+                    "name": "Testname",#self.db.get_all_data()[0].name,
+                    "username": "Username", #self.db.get_all_data()[0].username,
+                }  # for i in self.db.get_all_data()
+            ],
+            style=Pack(alignment="center", direction="column", flex=1),
+        )
         self.main_box = toga.Box(
             children=[
                 toga.ScrollContainer(
-                    content=toga.Box(
-                        children=[
-                            toga.Label(i.name, i.username, i.password, i.website)
-                            for i in self.db.get_all_data()
-                        ],
-                        style=Pack(alignment="center", direction="column", flex=1),
-                    ),
+                    content=self.mylist,
                     vertical=True,
                     horizontal=False,
                 ),
@@ -51,17 +55,28 @@ class MyPWManager(toga.App):  # App
 
     def addcontentwin(self, widget):
         newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center", padding=10))
-        username = toga.TextInput(placeholder="Username")
-        password = toga.PasswordInput(placeholder="Password")
-        website = toga.TextInput(placeholder="Username")
-        backbtn = toga.Button(text="Save & Back", on_press=self.go_home)
-        newbox.add(username)
-        newbox.add(password)
-        newbox.add(website)
-        newbox.add(backbtn)
+        self.myname = toga.TextInput(placeholder="Name")
+        self.username = toga.TextInput(placeholder="Username")
+        self.password = toga.PasswordInput(placeholder="Password")
+        self.website = toga.TextInput(placeholder="Website")
+        self.backbtn = toga.Button(text="Save & Back", on_press=self.save_pw)
+        newbox.add(self.myname)
+        newbox.add(self.username)
+        newbox.add(self.password)
+        newbox.add(self.website)
+        newbox.add(self.backbtn)
         self.main_window.content = newbox
 
-    def go_home(self, widget):
+    def save_pw(self, widget):
+        self.db.add_data(
+            name=self.myname.value,
+            username=self.username.value,
+            password=self.password.value,
+            website=self.website.value,
+        )
+        self.go_home()
+
+    def go_home(self):
         self.main_window.content = self.main_box
 
 
