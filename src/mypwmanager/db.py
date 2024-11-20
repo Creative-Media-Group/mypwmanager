@@ -1,32 +1,64 @@
 from sqlalchemy import Column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-# Datenbank und Basisklasse
-engine = create_engine("sqlite:///example.db")
-Base = declarative_base()
-Base.metadata.create_all(engine)
 
-# Session einrichten
-Session = sessionmaker(bind=engine)
-session = Session()
+class DB:
+    # Initialisierung der Datenbank
+    def __init__(self, db_url="sqlite:///example.db"):
+        self.engine = create_engine(db_url)
+        self.Base = declarative_base()
+        self.Session = sessionmaker(bind=self.engine)
+        self.session = self.Session()
 
+        # Definiere die Tabelle
+        class Data(self.Base):
+            __tablename__ = "users"
+            id = Column(Integer, primary_key=True)
+            name = Column(String, nullable=False)
+            age = Column(Integer, nullable=False)
 
-# Tabelle als Klasse definieren
-class DB(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    age = Column(Integer, nullable=False)
+        self.Data = Data
 
+        # Tabelle erstellen
+        self.Base.metadata.create_all(self.engine)
 
-if __name__ == "__main__":
     # Daten einfügen
-    new_user = DB(name="Anna", age=25)
-    session.add(new_user)
-    session.commit()
+    def add_data(self, name, age):
+        new_data = self.Data(name=name, age=age)
+        self.session.add(new_data)
+        self.session.commit()
 
     # Daten abrufen
-    users = session.query(DB).all()
-    for user in users:
-        print(user.name, user.age)
+    def get_all_data(self):
+        return self.session.query(self.Data).all()
+
+    # Benutzer löschen (optional)
+    def delete_data_by_id(self, data_id):
+        data = self.session.query(self.Data).filter_by(id=data_id).first()
+        if data:
+            self.session.delete(data)
+            self.session.commit()
+
+
+# Beispielverwendung
+if __name__ == "__main__":
+    db = DB()
+    while True:
+        users = db.get_all_users()
+        try:
+            cmd = input("a: add, l: list, r: remove, ra: remove all: ")
+            if cmd:
+                if cmd == "a":
+                    db.add_data(name=input("Name: "), age=int(input("Age: ")))
+                if cmd == "l":
+                    for user in users:
+                        print(user.id, user.name, user.age)
+                if cmd == "r":
+                    pass
+                if cmd == "ra":
+                    rang = len(users)
+                    for id in range(rang):
+                        db.delete_user_by_id(id)
+        except:
+            exit()

@@ -3,14 +3,16 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
+from mypwmanager.db import *
+from sqlalchemy import create_engine
+import os
 
 platform = toga.platform.current_platform
 
 
 class MyPWManager(toga.App):  # App
     def startup(self):
-        self.db = f"{self.paths.app.absolute()}/db/pw.sqlite"
-
+        self.db = DB(db_url=f"{self.paths.app.absolute()}/db/pw.db")
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
             self.lang = str(
