@@ -11,8 +11,9 @@ platform = toga.platform.current_platform
 
 class MyPWManager(toga.App):
     def startup(self):
-        for i in os.listdir(self.app.paths.app):
-            print(i)
+        self.db = f"{self.paths.app.absolute()}"
+        #for i in os.listdir(self.app.paths.app):
+        #    print(i)
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
         if platform == "android":
             self.lang = str(
