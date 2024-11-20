@@ -26,7 +26,7 @@ class MyPWManager(toga.App):  # App
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
         self.td = text_direction(lang=self.lang, fp=self.file)
-        main_box = toga.Box(
+        self.main_box = toga.Box(
             children=[
                 toga.ScrollContainer(
                     content=toga.Box(
@@ -45,14 +45,17 @@ class MyPWManager(toga.App):  # App
         )
 
         self.main_window = toga.MainWindow(title=self.formal_name)
-        self.main_window.content = main_box
+        self.main_window.content = self.main_box
         self.main_window.style = COLUMN
         self.main_window.show()
 
     def newwin(self, widget):
-        window = toga.Window()
-        window.content = toga.Box(children=[toga.Label("Window 1")])
-        window.show()
+        newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center",padding=10))
+        backbtn = toga.Button(text="Back", on_press=self.go_home)
+        newbox.add(backbtn)
+        self.main_window.content = newbox
+    def go_home(self, widget):
+        self.main_window.content = self.main_box
 
 
 def main():
