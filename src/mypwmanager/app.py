@@ -3,8 +3,7 @@ from toga.style import Pack
 from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
-from mypwmanager.db_mod.db import *
-from mypwmanager.direction.direction import text_direction
+import sqlite3
 
 platform = toga.platform.current_platform
 
@@ -27,13 +26,14 @@ class MyPWManager(toga.App):  # App
             self.lang = locale.getlocale()[0].split("_")[0]
         self.td = text_direction(lang=self.lang, fp=self.file)
         rows = []
+        print(self.db.get_all_data())
         for i in self.db.get_all_data():
             try:
                 data = (
                     {
                         "icon": toga.Icon(""),
-                        "title": i.name[0],  # self.db.get_all_data()[0].name,
-                        "subtitle": i.username[0],  # self.db.get_all_data()[0].username,
+                        "title": i.name[1](),
+                        "subtitle": i.username[2](),
                     },
                 )
             except:
