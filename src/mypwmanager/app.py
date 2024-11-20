@@ -11,7 +11,7 @@ platform = toga.platform.current_platform
 
 class MyPWManager(toga.App):
     def startup(self):
-        self.db = f"{self.paths.app.absolute()}"
+        self.db = f"{self.paths.app.absolute()}/db/pw.sqlite"
         #for i in os.listdir(self.app.paths.app):
         #    print(i)
         self.file = f"{self.paths.app.absolute()}/resources/localisation.csv"
