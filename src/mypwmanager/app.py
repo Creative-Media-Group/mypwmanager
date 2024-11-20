@@ -4,6 +4,7 @@ from toga.style.pack import COLUMN, ROW
 import locale
 from mylocale.TR import tr
 from mypwmanager.db_mod.db import *
+from mypwmanager.direction.direction import text_direction
 
 platform = toga.platform.current_platform
 
@@ -21,6 +22,7 @@ class MyPWManager(toga.App):  # App
             ).split("_")[0]
         else:
             self.lang = locale.getlocale()[0].split("_")[0]
+        self.td = text_direction(lang=self.lang)
         main_box = toga.Box(
             children=[
                 toga.ScrollContainer(
