@@ -39,7 +39,7 @@ class MyPWManager(toga.App):  # App
                     vertical=True,
                     horizontal=False,
                 ),
-                toga.Button("New Window", on_press=self.newwin),
+                toga.Button("New Window", on_press=self.addcontentwin),
             ],
             style=Pack(alignment="center", direction="column", flex=1),
         )
@@ -49,9 +49,13 @@ class MyPWManager(toga.App):  # App
         self.main_window.style = COLUMN
         self.main_window.show()
 
-    def newwin(self, widget):
+    def addcontentwin(self, widget):
         newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center", padding=10))
+        username = toga.TextInput(placeholder="Username")
+        password = toga.PasswordInput(placeholder="Password")
         backbtn = toga.Button(text="Back", on_press=self.go_home)
+        newbox.add(username)
+        newbox.add(password)
         newbox.add(backbtn)
         self.main_window.content = newbox
 
