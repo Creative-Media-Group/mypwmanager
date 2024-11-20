@@ -49,9 +49,9 @@ class DB:
 if __name__ == "__main__":
     db = DB(tablename="data")
     while True:
-        users = db.get_all_data()
+        data = db.get_all_data()
         try:
-            cmd = input("a: add, l: list, r: remove, ra: remove all: ")
+            cmd = input("a: add, l: list, r: remove, ra: remove all, e: exit: ")
             if cmd:
                 if cmd == "a":
                     db.add_data(
@@ -61,15 +61,17 @@ if __name__ == "__main__":
                         website=input("Website: "),
                     )
                 if cmd == "l":
-                    for user in users:
+                    for column in data:
                         print(
-                            user.id, user.name, user.name, user.password, user.website
+                            column.id, column.name, column.name, column.password, column.website
                         )
                 if cmd == "r":
                     pass
                 if cmd == "ra":
-                    rang = len(users)
+                    rang = len(data)
                     for id in range(rang):
                         db.delete_user_by_id(id)
+                if cmd == "e":
+                    exit()
         except:
             exit()
