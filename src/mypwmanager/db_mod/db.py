@@ -16,7 +16,9 @@ class DB:
             __tablename__ = tablename
             id = Column(Integer, primary_key=True)
             name = Column(String, nullable=False)
-            age = Column(Integer, nullable=False)
+            website = Column(Integer, nullable=False)
+            username = Column(String, nullable=False)
+            password = Column(String, nullable=False)
 
         self.Data = Data
 
@@ -24,8 +26,10 @@ class DB:
         self.Base.metadata.create_all(self.engine)
 
     # Daten einfügen
-    def add_data(self, name, age):
-        new_data = self.Data(name=name, age=age)
+    def add_data(self, name, website, username, password):
+        new_data = self.Data(
+            name=name, website=website, username=username, password=password
+        )
         self.session.add(new_data)
         self.session.commit()
 
@@ -50,10 +54,17 @@ if __name__ == "__main__":
             cmd = input("a: add, l: list, r: remove, ra: remove all: ")
             if cmd:
                 if cmd == "a":
-                    db.add_data(name=input("Name: "), age=int(input("Age: ")))
+                    db.add_data(
+                        name=input("Name: "),
+                        username=input("Username: "),
+                        password=input("Password: "),
+                        website=input("Website: "),
+                    )
                 if cmd == "l":
                     for user in users:
-                        print(user.id, user.name, user.age)
+                        print(
+                            user.id, user.name, user.name, user.password, user.website
+                        )
                 if cmd == "r":
                     pass
                 if cmd == "ra":
