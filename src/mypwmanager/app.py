@@ -28,13 +28,16 @@ class MyPWManager(toga.App):  # App
         self.td = text_direction(lang=self.lang, fp=self.file)
         rows = []
         for i in self.db.get_all_data():
-            data = (
-                {
-                    "icon": toga.Icon(""),
-                    "name": i.name,  # self.db.get_all_data()[0].name,
-                    "username": i.username,  # self.db.get_all_data()[0].username,
-                },
-            )
+            try:
+                data = (
+                    {
+                        "icon": toga.Icon(""),
+                        "name": i.name.name,  # self.db.get_all_data()[0].name,
+                        "username": i.username.name,  # self.db.get_all_data()[0].username,
+                    },
+                )
+            except:
+                data = {}
             rows.append(data)
         self.mylist = toga.DetailedList(
             # accessors=("name", "username"),
@@ -59,7 +62,9 @@ class MyPWManager(toga.App):  # App
         self.main_window.show()
 
     def addcontentwin(self, widget):
-        newbox = toga.Box(style=Pack(direction=COLUMN, alignment="center", padding=10))
+        newbox = toga.Box(
+            style=Pack(direction="column", alignment="center", padding=10)
+        )
         self.myname = toga.TextInput(placeholder="Name")
         self.username = toga.TextInput(placeholder="Username")
         self.password = toga.PasswordInput(placeholder="Password")
