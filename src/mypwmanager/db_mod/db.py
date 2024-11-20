@@ -63,7 +63,11 @@ if __name__ == "__main__":
                 if cmd == "l":
                     for column in data:
                         print(
-                            column.id, column.name, column.name, column.password, column.website
+                            column.id,
+                            column.name,
+                            column.name,
+                            column.password,
+                            column.website,
                         )
                 if cmd == "r":
                     pass

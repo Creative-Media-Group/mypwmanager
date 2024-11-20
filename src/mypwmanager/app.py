@@ -31,8 +31,9 @@ class MyPWManager(toga.App):  # App
                     vertical=True,
                     horizontal=False,
                 ),
-                toga.Button("New Window", on_press=self.newwin)
-            ]
+                toga.Button("New Window", on_press=self.newwin),
+            ],
+            style=Pack(alignment="center", direction="column", flex=1),
         )
 
         self.main_window = toga.MainWindow(title=self.formal_name)
@@ -40,7 +41,7 @@ class MyPWManager(toga.App):  # App
         self.main_window.style = COLUMN
         self.main_window.show()
 
-    def newwin(self,*args):
+    def newwin(self, *args):
         window = toga.Window()
         window.content = toga.Box(children=[toga.Label("Window 1")])
         window.show()
