@@ -13,7 +13,7 @@ class MyPWManager(toga.App):  # App
     def startup(self):
         self.paths.data.mkdir(exist_ok=True, parents=True)
         self.db_path = str(self.paths.data)
-        print(self.db_path) #create path for db
+        print(self.db_path)  # create path for db
         self.db = DB(
             tablename="pwmanager",
             db_url=f"sqlite:///{self.db_path}/pw.db",
@@ -50,12 +50,9 @@ class MyPWManager(toga.App):  # App
         self.main_window.show()
 
     def newwin(self, **args):
-        if platform == "android":
-            pass
-        else:
-            window = toga.Window()
-            window.content = toga.Box(children=[toga.Label("Window 1")])
-            window.show()
+        window = toga.Window()
+        window.content = toga.Box(children=[toga.Label("Window 1")])
+        window.show()
 
 
 def main():
