@@ -35,7 +35,7 @@ class MyPWManager(toga.App):  # App
                 }
             )
         self.mylist = toga.DetailedList(
-            # accessors=("name", "username"),
+            #accessors=("name", "username",""),
             data=rows,
             style=Pack(alignment="center", direction="column", flex=1),
         )
