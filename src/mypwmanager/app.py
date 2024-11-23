@@ -7,7 +7,7 @@ from mypwmanager.db_mod.db import DB
 
 platform = toga.platform.current_platform
 
-
+#
 class MyPWManager(toga.App):  # App
     def startup(self):
         self.paths.data.mkdir(exist_ok=True, parents=True)
